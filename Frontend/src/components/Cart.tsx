@@ -12,7 +12,7 @@ interface cartprop {
 export default function Cart({username, email, address, hobby}: cartprop) {
     const userLogin = useSelector((state: RootState) => state.LoginUser.value)
 
-    const User = username[0].toUpperCase()+username.slice(1).toLowerCase()
+    const User = username[0]?.toUpperCase()+username?.slice(1).toLowerCase()
 
     return (
         <>

@@ -34,7 +34,7 @@ export default function DropdownSelect({
   }, []);
 
   const apiUrl = import.meta.env.VITE_API_URL;
-  const userName = username[0].toUpperCase() + username.slice(1).toLowerCase();
+  const userName = username ? username[0]?.toUpperCase() + username?.slice(1).toLowerCase() : "";
 
   const handleLogout = async (e:React.FormEvent) => {
     e.preventDefault();
