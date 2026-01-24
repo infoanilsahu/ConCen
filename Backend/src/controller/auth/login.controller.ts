@@ -39,7 +39,7 @@ export const login = AsyncHandler(async (req:Request, res:Response) => {
     return res.status(200)
         .cookie("token",token,option)
         .json(
-            new ApiResponse(200,{userData: loginUser, tokenExpired: process.env.TOKEN_EXPIRY},"User successfully login")
+            new ApiResponse(200, loginUser,"User successfully login")
         )
 
 })

@@ -1,6 +1,8 @@
 import { useState } from "react"
 import axios from 'axios'
 import { Link, useNavigate } from "react-router-dom";
+import { pushData } from "../Redux/UserData";
+import { useDispatch } from "react-redux";
 
 
 interface error {
@@ -9,6 +11,7 @@ interface error {
 }
 
 export default function Login() {
+
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [isLogin, setIsLogin] = useState<boolean>(false)
@@ -16,6 +19,8 @@ export default function Login() {
         isError: false,
         errorMessage: ""
     })
+
+    const dispatch = useDispatch()
 
     const navigate = useNavigate()
 
@@ -35,6 +40,7 @@ export default function Login() {
             }
             const res = await axios.post(`${apiUrl}/api/v1/auth/login`,{email, password}, {withCredentials: true})
             if(res.status === 200) {
+                dispatch(pushData({email: res.data.data.email, username: res.data.data.username}))
                 navigate("/home")
             }
             

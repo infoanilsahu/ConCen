@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { negative } from "../Redux/LoginUser";
+import { deleteData } from "../Redux/UserData";
 
 interface DropdownSelectProps {
   trigger: ReactNode; // can be anything
@@ -40,9 +41,10 @@ export default function DropdownSelect({
 
     try {
         const res = await axios.get(`${apiUrl}/api/v1/auth/logout`,{withCredentials: true})
-        if(res.statusText == 'OK') {
-            dispatch(negative())
-            navigate("/")
+        if(res.status === 200) {
+          dispatch(negative())
+          dispatch(deleteData())
+          navigate("/")
         }
     } catch (error: any) {
         console.log(error);

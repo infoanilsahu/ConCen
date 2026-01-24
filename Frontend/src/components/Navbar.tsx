@@ -7,6 +7,8 @@ import DropdownSelect from "./Drop.tsx"
 
 export default function Navbar() {
     const LoginUser = useSelector( (state: RootState) => state.LoginUser.value)
+    const UserEmail = useSelector( (state: RootState) => state.UserData.email)
+    const UserName = useSelector( (state: RootState) => state.UserData.username)
 
 
     return (
@@ -25,7 +27,7 @@ export default function Navbar() {
                             <div className="img  ">
                                 <DropdownSelect trigger={
                                     <span className="hover:opacity-85"><img src={user} width="30px" /></span>
-                                } username="anil" email="anil@gmail.com" />
+                                } username={UserName} email={UserEmail} />
                             </div>
                         </div>  
                     </div>
