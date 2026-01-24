@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "tsx watch backend/src/index.ts",
     "build": "npm install && npm run build:backend && npm run build:frontend",
-    "build:backend": "tsc -p backend/tsconfig.json",
+    "build:backend": "tsc -p Backend/tsconfig.json",
     "build:frontend": "cd frontend && npm install && npm run build",
     "start": "node backend/dist/index.js"
   },
