@@ -47,9 +47,9 @@ export default function Register() {
                 address,
                 hobby
             },{withCredentials: true})
-            if(res.statusText == "OK") {
+            if(res.status === 200) {
                 const login = await axios.post(`${apiUrl}/api/v1/auth/login`,{email, password},{withCredentials: true})
-                if(login.statusText == "OK") {
+                if(login.status === 200) {
                     return navigate("/home")
                 }
             }
