@@ -1,14 +1,37 @@
 import { type RootState } from "../Redux/store.ts"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import user from '../icons/user.svg'
 import search from '../icons/search.svg'
 import { Link } from "react-router-dom"
 import DropdownSelect from "./Drop.tsx"
+import { useCallback, useEffect } from "react"
+import axios from "axios"
+import { pushData } from "../Redux/UserData.ts";
 
 export default function Navbar() {
     const LoginUser = useSelector( (state: RootState) => state.LoginUser.value)
     const UserEmail = useSelector( (state: RootState) => state.UserData.email)
     const UserName = useSelector( (state: RootState) => state.UserData.username)
+    const dispatch = useDispatch()
+    const apiUrl = import.meta.env.VITE_API_URL
+
+    const handleUser = useCallback(async () => {
+        console.log("run1");
+        
+       try {
+        if(!LoginUser) return ;
+        const res = await axios.get(`${apiUrl}/api/v1/data/user`,{withCredentials: true})
+        if(res.status === 200) dispatch(pushData({email: res.data.data.email, username: res.data.data.username}));
+       } catch (error: any) {
+        console.log(error);
+       } 
+    },[])
+
+    useEffect( () => {
+        handleUser()
+        console.log("run2");
+        
+    },[])
 
 
     return (

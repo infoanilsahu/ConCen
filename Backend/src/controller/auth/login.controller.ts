@@ -3,7 +3,6 @@ import { AsyncHandler } from "../../utils/AsyncHandler.js";
 import { ApiError } from "../../utils/ApiError.js";
 import { User } from "../../model/user.model.js";
 import { ApiResponse } from "../../utils/ApiResponse.js";
-import { TokenExpiredError } from "jsonwebtoken";
 
 export const login = AsyncHandler(async (req:Request, res:Response) => {
     

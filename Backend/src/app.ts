@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import path from 'path';
@@ -29,8 +29,12 @@ app.use("/api/v1/data", home);
 // Serve frontend build
 app.use(express.static(path.join(__dirname, '/Frontend/dist')));
 
-app.use( (req: Request, res: Response) => {
+app.use( (req: Request, res: Response, next: NextFunction) => {
+    if (req.originalUrl.startsWith('/api')) {
+    return next();
+  }
     res.sendFile(path.join(__dirname, 'Frontend', 'dist', 'index.html'));
 });
+
 
 export { app };

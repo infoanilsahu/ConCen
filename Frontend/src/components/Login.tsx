@@ -39,8 +39,10 @@ export default function Login() {
                 return ;
             }
             const res = await axios.post(`${apiUrl}/api/v1/auth/login`,{email, password}, {withCredentials: true})
+            console.log(res);
+            
             if(res.status === 200) {
-                dispatch(pushData({email: res.data.data.email, username: res.data.data.username}))
+                dispatch(pushData({email: res.data?.data?.email, username: res.data?.data?.username}))
                 navigate("/home")
             }
             
