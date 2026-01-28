@@ -1,4 +1,4 @@
-import { useEffect, type JSX } from "react";
+import { useEffect, useState, type JSX } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import type { RootState } from "../Redux/store";
@@ -12,6 +12,7 @@ interface Prop {
 export function PrivateRoute({ children }: Prop) {
 
     const userLogin = useSelector((state: RootState) => state.LoginUser.value)
+    const [loading, setLoading] = useState(true);
     const dispatch = useDispatch()
     const apiUrl = import.meta.env.VITE_API_URL;
      useEffect(() => {
@@ -25,9 +26,15 @@ export function PrivateRoute({ children }: Prop) {
                 })
                 .catch(err => {
                     console.log(err);
-                });
+                })
+                .finally( () => setLoading(false));
+        }
+        else {
+            setLoading(false)
         }
     }, [userLogin, dispatch, apiUrl]);
+
+    if (loading) return <p>Loading...</p>;
 
     return userLogin ? children : <Navigate to="/login" replace />
 }

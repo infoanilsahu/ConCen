@@ -8,6 +8,7 @@ import { useCallback, useEffect } from "react"
 import axios from "axios"
 import { pushData } from "../Redux/UserData.ts";
 
+
 export default function Navbar() {
     const LoginUser = useSelector( (state: RootState) => state.LoginUser.value)
     const UserEmail = useSelector( (state: RootState) => state.UserData.email)
@@ -44,7 +45,9 @@ export default function Navbar() {
                 {LoginUser ? (
                     <div className="user flex gap-3 items-center ">
                         <div className="search">
-                            <img src={search} width="28px" />
+                            <Link to="/search">
+                                <img src={search} width="28px" />
+                            </Link>
                         </div>
                         <div className="user-icon ">
                             <div className="img  ">
