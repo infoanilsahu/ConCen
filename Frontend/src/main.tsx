@@ -12,6 +12,7 @@ import HomeAll from './components/Homeall.tsx';
 import Login from './components/Login.tsx';
 import Home from './components/Home.tsx';
 import Register from './components/Register.tsx';
+import Search from './components/Search.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,6 +21,7 @@ const router = createBrowserRouter(
       <Route path='/login' element={<PublicRoute><Login/></PublicRoute>} />
       <Route path='/register' element={<PublicRoute><Register/></PublicRoute>} />
       <Route path='/home' element={<PrivateRoute><Home /></PrivateRoute>} />
+      <Route path='/search' element={<PrivateRoute><Search /></PrivateRoute>} />
     </Route>
   )
 )
